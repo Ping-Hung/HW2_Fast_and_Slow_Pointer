@@ -1,19 +1,26 @@
-# HW2_Fast_and_Slow_Pointer
-Part of HW2 from Linux Kernel Internals 2026. Analyzing cache performance of the 2 implementation of  "finding the middle node" LeetCode Problem
+# HW2: Fast and Slow Pointer
+Part of HW2 from [Linux Kernel Internals 2026](https://wiki.csie.ncku.edu.tw/linux/schedule).
 
-# Agenda
-- Explore kernel commit and docs to see how memory is allocated in the
-  kernel.
-- Plan on `perf` tool usage.
+# Goal
+Analyzes cache performance of two approaches to the "find middle node" problem:
+- **Fast/slow pointer**: single-pass traversal
+- **Two-scan**: count length, then traverse to the middle
 
+## Components
+- **Linked list**: singly-linked list with head, tail, and size tracking
+- **Memory allocator**: bump allocator that pre-allocates a large block and hands out fixed-size chunks
+- **Shuffle**: randomizes node addresses to simulate realistic (non-contiguous) memory layouts
+- **Data collector**: records address deltas between consecutive nodes
 
+## Experiment
 
-# TODOs
-- [x] Decide (perhaps finalize) the main focus of the experiment.
-    - Will measure cache performance difference in the 2 solutions to "middle of linked-list" LeetCode Problem presented in learning material.
-- [x] Implement memory allocator (using bump allocator strategy).
-    - This is optional for now, will do it if time permits.
-- [ ] Write a MakeFile that runs experiment(s).
+1. Run both middle-finding algorithms on lists of varying sizes
+2. Measure cache miss rates using `perf`
+
+## TODO
+- [ ] Finalize experiment scope
+- [ ] Implement bump allocator
+- [ ] Write Makefile to automate experiments
 - [ ] Formulate a plan on how to use `perf` (`event_perf`) to benchmark and how to present the data
     - status: 
         - know how to set `perf_event_paranoid` kernel variable to `0`
