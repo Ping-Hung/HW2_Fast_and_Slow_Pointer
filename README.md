@@ -9,6 +9,9 @@ Analyzes cache performance of two approaches to the "find middle node" problem:
 ## Components
 - **Linked list**: singly-linked list with head, tail, and size tracking
 - **Memory allocator**: bump allocator that pre-allocates a large block and hands out fixed-size chunks
+    - `Ping-Hung`'s suggestion after reading [what every C programmer should know about memory](https://marek.vavrusa.com/memory/):
+        - A ***slab allocator*** might be more suitable in this case, the article above provides example code.
+        - If in a time crunch, we'll use whatever we have at the moment.
 - **Shuffle**: randomizes node addresses to simulate realistic (non-contiguous) memory layouts
 - **Data collector**: records address deltas between consecutive nodes
 
@@ -32,3 +35,4 @@ Analyzes cache performance of two approaches to the "find middle node" problem:
 
 ## Others
 1. [你所不知道的 C 語言：記憶體管理、對齊及硬體特性](https://hackmd.io/@sysprog/c-memory?stext=7004%3A6%3A0%3A1773894618%3ABu6f8x)
+2. [what every C programmer should know about memory](https://marek.vavrusa.com/memory/)
