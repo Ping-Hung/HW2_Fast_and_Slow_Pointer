@@ -19,5 +19,9 @@ Part of HW2 from Linux Kernel Internals 2026. Analyzing cache performance of the
         - know how to set `perf_event_paranoid` kernel variable to `0`
           (required for measuring CPU cache performance).
 
-# Relevant Linux Commit
+# Resources
+## Relevant Linux Commit
 1. bf2650d0599c999cf2fdffa721b00e25989918fb
+
+## Others
+1. [你所不知道的 C 語言：記憶體管理、對齊及硬體特性](https://hackmd.io/@sysprog/c-memory?stext=7004%3A6%3A0%3A1773894618%3ABu6f8x)
