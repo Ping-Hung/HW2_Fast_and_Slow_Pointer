@@ -1,6 +1,6 @@
 project(mem_allocator)
 
-add_library(${PROJECT_NAME} bump_allocator.c)
+add_library(${PROJECT_NAME} slab_allocator.c)
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC

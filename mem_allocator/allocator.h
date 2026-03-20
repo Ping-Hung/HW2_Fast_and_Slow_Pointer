@@ -1,17 +1,22 @@
-#ifndef __MEM_ALLOCATOR_INCLUDE_ALLOCATOR_H_
-#define __MEM_ALLOCATOR_INCLUDE_ALLOCATOR_H_
+#ifndef __SLAB_ALLOCATOR_INCLUDE_ALLOCATOR_H_
+#define __SLAB_ALLOCATOR_INCLUDE_ALLOCATOR_H_
+
+/*
+ * Reference:
+ * 1. https://github.com/thibault-reigner/userland_slab/blob/master/src/slab.h
+ * 2. https://marek.vavrusa.com/memory/
+*/
 
 #include <stddef.h>
 
-struct mem_allocator {
-    size_t total_size;
-    size_t remain_size;
-    void* head; /* perhaps the base address of the entire block asked from 
-                   system memory (I suggest the name base, but head it's okay 😁*/
-    void* curr; /* location of available (unused) memory at the moment 
-                    curr - head shall denote how much memory is used */
+struct slab_allocator {
+    void** head; /* the head of the linked list of the free nodeds */
 };
 
-void *mem_alloc(struct mem_allocator* allocator, size_t mem_size);
+void allocator_init(struct slab_allocator* allocator, size_t obj_size, size_t obj_count);
 
-#endif  //__MEM_ALLOCATOR_INCLUDE_ALLOCATOR_H_
+void *mem_alloc(struct slab_allocator* allocator);
+
+void mem_free(struct slab_allocator* allocator, void *mem);
+
+#endif  //__SLAB_ALLOCATOR_INCLUDE_ALLOCATOR_H_
