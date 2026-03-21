@@ -1,6 +1,9 @@
 # HW2: Fast and Slow Pointer
 Part of HW2 from [Linux Kernel Internals 2026](https://wiki.csie.ncku.edu.tw/linux/schedule).
 
+# Report
+please see [report.md](report.md) for details.
+
 # Goal
 Analyzes cache performance of two approaches to the "find middle node" problem:
 - **Fast/slow pointer**: single-pass traversal
@@ -16,7 +19,6 @@ Analyzes cache performance of two approaches to the "find middle node" problem:
 - **Data collector**: records address deltas between consecutive nodes
 
 ## Experiment
-
 1. Run both middle-finding algorithms on lists of varying sizes
 2. Measure cache miss rates using `perf`
 
