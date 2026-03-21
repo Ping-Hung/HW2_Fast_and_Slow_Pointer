@@ -25,6 +25,7 @@ int main() {
       head = head->next;
     }
     list_free(&allocator, &list);
+    allocator_release(&allocator);
 #else
     /* repeatedly calling malloc */
     struct list_node *head = list_create(LIST_SIZE);

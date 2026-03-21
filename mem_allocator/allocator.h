@@ -10,6 +10,7 @@
 #include <stddef.h>
 
 struct slab_allocator {
+    void* base;
     void** head; /* the head of the linked list of the free nodeds */
 };
 
@@ -18,5 +19,7 @@ void allocator_init(struct slab_allocator* allocator, size_t obj_size, size_t ob
 void *mem_alloc(struct slab_allocator* allocator);
 
 void mem_free(struct slab_allocator* allocator, void *mem);
+
+void allocator_release(struct slab_allocator* allocator);
 
 #endif  //__SLAB_ALLOCATOR_INCLUDE_ALLOCATOR_H_
