@@ -4,7 +4,7 @@
 #include "list.h"
 #include "allocator.h"
 
-struct list_header *list_create(struct mem_allocator* alloc, size_t size) {
+struct list_header *list_create(struct slab_allocator* allocator, size_t size) {
     /* using pointer-to-pointer, repeatedly calling malloc to build a list of
      * *size* nodes. I.e. malloc is called *size* times.
      * */
@@ -12,7 +12,7 @@ struct list_header *list_create(struct mem_allocator* alloc, size_t size) {
     *new_list = (struct list_header){.head = NULL, .tail = NULL, .size = 0};
 
     for (struct list_node **curr = &new_list->head; size != 0; curr = &(*curr)->next) {
-        *curr = malloc(sizeof(**curr));
+        *curr = (struct list_node*)mem_alloc(allocator);
         if (*curr == NULL) {
             fprintf(stderr, "list_create: malloc failed\n");
             exit(EXIT_FAILURE);
@@ -25,13 +25,13 @@ struct list_header *list_create(struct mem_allocator* alloc, size_t size) {
     return new_list;
 }
 
-void list_free(struct list_header **list) {
+void list_free(struct slab_allocator* allocator, struct list_header **list) {
     /* walk the list from head to last node, calling free on every node */
     struct list_node *head = (*list)->head;
     while (head) {
         struct list_node *victim = head;
         head = head->next;
-        free(victim);
+        mem_free(allocator, (void*)victim);
     }
     free(*list);
     *list = NULL;
