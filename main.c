@@ -24,6 +24,8 @@ int main() {
       printf("%d  ", head->value);
       head = head->next;
     }
+    printf("\n");
+
     list_free(&allocator, &list);
     allocator_release(&allocator);
 #else

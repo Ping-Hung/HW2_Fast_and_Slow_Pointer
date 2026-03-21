@@ -21,9 +21,9 @@ Analyzes cache performance of two approaches to the "find middle node" problem:
 2. Measure cache miss rates using `perf`
 
 ## TODO
-- [ ] Finalize experiment scope
-- [ ] Implement bump allocator
-- [ ] Write Makefile to automate experiments
+- [x] Finalize experiment scope
+- [x] Implement an allocator
+- [x] Write Makefile to automate experiments
 - [ ] Formulate a plan on how to use `perf` (`event_perf`) to benchmark and how to present the data
     - status: 
         - know how to set `perf_event_paranoid` kernel variable to `0`
