@@ -4,9 +4,6 @@
 #include "list.h"
 #include "allocator.h"
 
-/* local helpers */
-static inline void _fisher_yates_shuffle(list_header *a_header);
-
 struct list_header *list_create(struct slab_allocator* allocator, size_t size) {
     /* using pointer-to-pointer, repeatedly calling malloc to build a list of
      * *size* nodes. I.e. malloc is called *size* times.
@@ -54,7 +51,7 @@ struct list_node *find_middle_fast_slow(struct list_node *head)
 struct list_node *find_middle_two_scan(struct list_node *head)
 {
     size_t n_nodes = 0;
-    for (struct ListNode *curr = head; curr; curr = curr->next) {
+    for (struct list_node *curr = head; curr; curr = curr->next) {
         n_nodes += 1;
     }
 
