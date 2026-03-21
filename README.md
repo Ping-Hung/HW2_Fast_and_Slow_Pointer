@@ -36,3 +36,4 @@ Analyzes cache performance of two approaches to the "find middle node" problem:
 ## Others
 1. [你所不知道的 C 語言：記憶體管理、對齊及硬體特性](https://hackmd.io/@sysprog/c-memory?stext=7004%3A6%3A0%3A1773894618%3ABu6f8x)
 2. [what every C programmer should know about memory](https://marek.vavrusa.com/memory/)
+3. [The Slab Allocator: An Object-Caching Kernel Memory Allocator (paper that first proposed the slab allocator)](https://people.eecs.berkeley.edu/~kubitron/cs194-24/hand-outs/bonwick_slab.pdf)
