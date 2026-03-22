@@ -1,6 +1,9 @@
 # HW2: Fast and Slow Pointer
 Part of HW2 from [Linux Kernel Internals 2026](https://wiki.csie.ncku.edu.tw/linux/schedule).
 
+# HackMDs
+- Ping-Hung: https://hackmd.io/@GziTqAu1S-yp4upMQJi1ZA/linux2026-stdc
+- YingChen-Lee: https://hackmd.io/@d1MVB-tCQ92KCHBsW4mrJg/linux2026-hw2
 # Report
 please see [report.md](report.md) for details.
 
