@@ -32,6 +32,10 @@ Analyzes cache performance of two approaches to the "find middle node" problem:
 ## Relevant Linux Commit
 1. bf2650d0599c999cf2fdffa721b00e25989918fb
 
+## HackMD reference
+1. [Ping-Hung](https://hackmd.io/@GziTqAu1S-yp4upMQJi1ZA/linux2026-stdc)
+2. [YingChen-Lee](https://hackmd.io/@d1MVB-tCQ92KCHBsW4mrJg/linux2026-hw2)
+
 ## Others
 1. [你所不知道的 C 語言：記憶體管理、對齊及硬體特性](https://hackmd.io/@sysprog/c-memory?stext=7004%3A6%3A0%3A1773894618%3ABu6f8x)
 2. [what every C programmer should know about memory](https://marek.vavrusa.com/memory/)
