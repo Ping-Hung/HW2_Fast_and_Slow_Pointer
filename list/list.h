@@ -18,8 +18,11 @@ struct list_header {
     size_t size;
 };
 
-
 struct list_header *list_create(struct slab_allocator* alloc, size_t size);
 void list_free(struct slab_allocator* alloc, struct list_header **list);    /* walk the list from head to last node, freeing each of them */
 
-#endif  // __LIST_H_
+/* Find middle functions */
+struct list_node *find_middle_fast_slow(struct list_node *head);
+struct list_node *find_middle_two_scan(struct list_node *head);
+
+#endif  // __LIST_H__
