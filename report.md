@@ -1,7 +1,6 @@
 # Middle Finding Algorithms Benchmark Experiment
 ## Goal: Benchmark and compare cache behavior of the two algorithms mentioned in class (*2 scan* and *fast-and-slow* pointers).
 
-
 ## Experiment Setup
 Referring back to [HackMD's Experiment Design](https://hackmd.io/@d1MVB-tCQ92KCHBsW4mrJg/linux2026-hw2?stext=509%3A148%3A0%3A1774135145%3AiSSbet), the experiment will try to mimic real-world memory allocation patterns, which leads to the following design (and steps).
 
@@ -12,3 +11,5 @@ Referring back to [HackMD's Experiment Design](https://hackmd.io/@d1MVB-tCQ92KCH
 5. Run the second algorithm (*fast-and-slow pointers*), and benchmark its performance
 6. Free all allocated memory.
 
+## `Perf` setup
+1. set `perf_event_paranoid` kernel variable to `0` so `perf` could monitor cache behavior.
