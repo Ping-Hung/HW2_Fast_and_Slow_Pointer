@@ -162,5 +162,13 @@ Overhead  Command          Shared Object          Symbol
    2.96%  HW2_linked_list  HW2_linked_list_cache  [.] allocator_init
 
 ```
+## Summary
 
+Our benchmarks focused on cache-miss counts, which means the instances when the CPU is forced to fetch data from RAM. Through subracting the Event countof ***fast-and-slow-pointers*** from ***two-scan***, we could see that ***fast-and-slow-pointers*** have less cache misses, hence a better locality.
+
+|run|Event count(approx.) difference of the 2 algorithms|
+|:---:|:---:|
+|$10^4$|2333|
+|$10^6$|-80044|
+|$10^8$|9856722|
 
