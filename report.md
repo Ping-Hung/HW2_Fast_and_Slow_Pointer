@@ -64,11 +64,103 @@ Linux IdeaPad-3-15ADA05 6.17.0-19-generic #19~24.04.2-Ubuntu SMP PREEMPT_DYNAMIC
 ```
 
 ## Results
-### 
-![$10^4$ 2-scan](Screenshot\ from\ 2026-03-24\ 23-36-14.png)
+### $10^4$ Nodes
+___
+2-scan
+```
+Samples: 16  of event 'L1-dcache-load-misses', Event count (approx.): 32047
+Overhead  Command          Shared Object          Symbol
+  12.05%  HW2_linked_list  [unknown]              [k] 0xffffffff82f725ea
+  11.95%  HW2_linked_list  HW2_linked_list_cache  [.] mem_free
+  11.28%  HW2_linked_list  HW2_linked_list_cache  [.] find_middle_two_scan
+  11.03%  HW2_linked_list  libc.so.6              [.] _int_malloc
+  10.91%  HW2_linked_list  HW2_linked_list_cache  [.] allocator_init
+  10.67%  HW2_linked_list  [unknown]              [k] 0xffffffff821094a0
+  10.45%  HW2_linked_list  [unknown]              [k] 0xffffffff81a00b90
+   9.34%  HW2_linked_list  ld-linux-x86-64.so.2   [.] _dl_new_object
+   7.51%  HW2_linked_list  [unknown]              [k] 0xffffffff82211e45
+   3.73%  HW2_linked_list  [unknown]              [k] 0xffffffff82f8e5e7
+   0.93%  HW2_linked_list  [unknown]              [k] 0xffffffff82fad580
+   0.12%  HW2_linked_list  [unknown]              [k] 0xffffffff81d99b04
+   0.02%  perf-exec        [unknown]              [k] 0xffffffff82fab391
+```
+___
+fast-and-slow-pointers
+```
+Samples: 15  of event 'L1-dcache-load-misses', Event count (approx.): 29714
+Overhead  Command          Shared Object          Symbol
+  13.20%  HW2_linked_list  HW2_linked_list_cache  [.] mem_free
+  12.69%  HW2_linked_list  HW2_linked_list_cache  [.] find_middle_fast_slow
+  12.24%  HW2_linked_list  HW2_linked_list_cache  [.] mem_alloc
+  12.16%  HW2_linked_list  [unknown]              [k] 0xffffffff8213ccdd
+  12.11%  HW2_linked_list  [unknown]              [k] 0xffffffff82f8e5e7
+  11.78%  HW2_linked_list  [unknown]              [k] 0xffffffff82fad580
+  11.22%  HW2_linked_list  [unknown]              [k] 0xffffffff82102b12
+   9.15%  HW2_linked_list  [unknown]              [k] 0xffffffff820fa8f4
+   4.37%  HW2_linked_list  [unknown]              [k] 0xffffffff821215fd
+   0.94%  HW2_linked_list  [unknown]              [k] 0xffffffff821c0985
+   0.13%  HW2_linked_list  [unknown]              [k] 0xffffffff81d99b51
+   0.02%  perf-exec        [unknown]              [k] 0xffffffff821f4476
+   0.01%  perf-exec        [unknown]              [k] 0xffffffff82fad580
+```
 
-|number of nodes| $10^4$ (160000 bytes) | $10^6$ (16000000 bytes) | $10^8$ (1600000000 bytes)|
-|:---:|:---:|:---:|:---:|
-|performance |  |  |  |
+### $10^6$ Nodes
+___
+two-scan
+```
+Samples: 250  of event 'L1-dcache-load-misses', Event count (approx.): 1484982
+Overhead  Command          Shared Object          Symbol
+  25.47%  HW2_linked_list  HW2_linked_list_cache  [.] find_middle_two_scan
+  14.92%  HW2_linked_list  HW2_linked_list_cache  [.] allocator_init
+  14.72%  HW2_linked_list  HW2_linked_list_cache  [.] list_create
+  11.64%  HW2_linked_list  HW2_linked_list_cache  [.] mem_free
+   8.83%  HW2_linked_list  [unknown]              [k] 0xffffffff82f8e5e7
+   5.35%  HW2_linked_list  HW2_linked_list_cache  [.] list_free
+   2.14%  HW2_linked_list  HW2_linked_list_cache  [.] mem_alloc
+
+```
+___
+fast-and-slow-pointers
+```
+Samples: 261  of event 'L1-dcache-load-misses', Event count (approx.): 1565026
+Overhead  Command          Shared Object          Symbol
+  22.66%  HW2_linked_list  HW2_linked_list_cache  [.] find_middle_fast_slow
+  13.46%  HW2_linked_list  HW2_linked_list_cache  [.] allocator_init
+  12.41%  HW2_linked_list  HW2_linked_list_cache  [.] mem_free
+   9.61%  HW2_linked_list  [unknown]              [k] 0xffffffff82f8e5e7
+   8.43%  HW2_linked_list  HW2_linked_list_cache  [.] mem_alloc
+   8.15%  HW2_linked_list  HW2_linked_list_cache  [.] list_create
+   4.34%  HW2_linked_list  HW2_linked_list_cache  [.] list_free
+```
+
+
+### $10^8$ Nodes
+___
+two-scan
+```
+Samples: 15K of event 'L1-dcache-load-misses', Event count (approx.): 135589989
+Overhead  Command          Shared Object          Symbol
+  27.82%  HW2_linked_list  HW2_linked_list_cache  [.] find_middle_two_scan
+  16.22%  HW2_linked_list  HW2_linked_list_cache  [.] list_create
+  10.91%  HW2_linked_list  HW2_linked_list_cache  [.] mem_free
+   8.00%  HW2_linked_list  HW2_linked_list_cache  [.] list_free
+   6.00%  HW2_linked_list  [unknown]              [k] 0xffffffff82f8e5e7
+   4.16%  HW2_linked_list  HW2_linked_list_cache  [.] allocator_init
+   2.69%  HW2_linked_list  HW2_linked_list_cache  [.] mem_alloc
+```
+___
+fast-and-slow-pointers
+```
+Samples: 13K of event 'L1-dcache-load-misses', Event count (approx.): 125733267
+Overhead  Command          Shared Object          Symbol
+  29.93%  HW2_linked_list  HW2_linked_list_cache  [.] find_middle_fast_slow
+  13.21%  HW2_linked_list  HW2_linked_list_cache  [.] list_create
+  12.86%  HW2_linked_list  HW2_linked_list_cache  [.] mem_free
+   7.63%  HW2_linked_list  HW2_linked_list_cache  [.] list_free
+   6.13%  HW2_linked_list  HW2_linked_list_cache  [.] mem_alloc
+   4.69%  HW2_linked_list  [unknown]              [k] 0xffffffff82f8e5e7
+   2.96%  HW2_linked_list  HW2_linked_list_cache  [.] allocator_init
+
+```
 
 
