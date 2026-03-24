@@ -6,6 +6,7 @@
 #include "list.h"
 
 #define ALLOCATOR /* uncomment this to test allocator code */
+#define TWO_SCAN /* uncomment this for 2 scan benchmarks */
 
 const char *prog_name = "list_creation";
 #define LIST_SIZE 10
@@ -30,12 +31,11 @@ int main() {
     struct list_node *head = list->head;
     _fisher_yates_shuffle(&head);
 
-    /* print the list */
-    while (head != NULL) {
-      printf("%d  ", head->value);
-      head = head->next;
-    }
-    printf("\n");
+#ifdef TWO_SCAN
+    printf("The middle is at %p\n", (void *)find_middle_two_scan(head));
+#else
+    printf("The middle is at %p\n", (void *)find_middle_fast_slow(head));
+#endif /* end of TWO_SCAN */
 
     list_free(&allocator, &list);
     allocator_release(&allocator);
@@ -44,8 +44,7 @@ int main() {
     struct list_node *head = list_create(LIST_SIZE);
     /* maybe do something with the created list */
     list_free_loop(head);
-#endif
-
+#endif /* end of ALLOCATOR */
     return EXIT_SUCCESS;
 }
 

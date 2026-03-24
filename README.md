@@ -42,3 +42,5 @@ Analyzes cache performance of two approaches to the "find middle node" problem:
 1. [你所不知道的 C 語言：記憶體管理、對齊及硬體特性](https://hackmd.io/@sysprog/c-memory?stext=7004%3A6%3A0%3A1773894618%3ABu6f8x)
 2. [what every C programmer should know about memory](https://marek.vavrusa.com/memory/)
 3. [The Slab Allocator: An Object-Caching Kernel Memory Allocator (paper that first proposed the slab allocator)](https://people.eecs.berkeley.edu/~kubitron/cs194-24/hand-outs/bonwick_slab.pdf)
+4. [Why Is My Modified C Program Faster? Understanding perf Cache Events and Misses Explained](https://linuxvox.com/blog/what-are-perf-cache-events-meaning)
+5.  [運用 Perf 分析程式效能並改善](https://hackmd.io/@sysprog/gnu-linux-dev/https%3A%2F%2Fhackmd.io%2F%40sysprog%2Flinux-perf)
