@@ -24,9 +24,6 @@ Referring back to [HackMD's Experiment Design](https://hackmd.io/@d1MVB-tCQ92KCH
        misses and LLC misses (Last-Level-Cache miss (when CPU *must* fetch
        RAM))
     2. `perf report`: for summary
-    3. 
-
-
 
 |trial number|trial 1|trial 2|trial 3|
 |:---:|:---:|:---:|:---:|
@@ -164,7 +161,7 @@ Overhead  Command          Shared Object          Symbol
 ```
 ## Summary
 
-Our benchmarks focused on cache-miss counts, which means the instances when the CPU is forced to fetch data from RAM. Through subracting the Event countof ***fast-and-slow-pointers*** from ***two-scan***, we could see that ***fast-and-slow-pointers*** have less cache misses, hence a better locality.
+Our benchmarks focused on cache-miss counts, which means the instances when the CPU is forced to fetch data from RAM. Through subracting the Event count of ***fast-and-slow-pointers*** from ***two-scan***, we could see that ***fast-and-slow-pointers*** have less cache misses, hence a better locality.
 
 |run|Event count(approx.) difference of the 2 algorithms|
 |:---:|:---:|
