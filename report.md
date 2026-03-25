@@ -20,10 +20,10 @@ Referring back to [HackMD's Experiment Design](https://hackmd.io/@d1MVB-tCQ92KCH
   being 16 bytes so we could allocate exactly $10^4$, $10^6$, and $10^8$ nodes.
 
 * `perf` commands:
-    1. `perf record -e L1-dcache-load-misses,LLC-load-misses`: track L1d cache
-       misses and LLC misses (Last-Level-Cache miss (when CPU *must* fetch
-       RAM))
+    1. `perf record -e L1-dcache-load-misses`: track L1d cache misses 
     2. `perf report`: for summary
+    3. `perf stat -e cache-references,cache-misses,cycles,instructions`:
+        - check cache-refernces, cache-misses, cycles, instructions stats
 
 |trial number|trial 1|trial 2|trial 3|
 |:---:|:---:|:---:|:---:|
@@ -64,6 +64,7 @@ Linux IdeaPad-3-15ADA05 6.17.0-19-generic #19~24.04.2-Ubuntu SMP PREEMPT_DYNAMIC
 ### $10^4$ Nodes
 ___
 2-scan
+`perf record -e L1-dcache-load-misses`:
 ```
 Samples: 16  of event 'L1-dcache-load-misses', Event count (approx.): 32047
 Overhead  Command          Shared Object          Symbol
@@ -81,8 +82,27 @@ Overhead  Command          Shared Object          Symbol
    0.12%  HW2_linked_list  [unknown]              [k] 0xffffffff81d99b04
    0.02%  perf-exec        [unknown]              [k] 0xffffffff82fab391
 ```
+`perf stat -e cache-references,cache-misses,cycles,instructions`:
+```
+Performance counter stats for './HW2_linked_list_cache':
+
+           134,249      cache-references                                                      
+            33,338      cache-misses                     #   24.83% of all cache refs         
+         2,421,890      cycles                                                                
+         2,107,601      instructions                     #    0.87  insn per cycle            
+```
 ___
 fast-and-slow-pointers
+`perf stat -e cache-references,cache-misses,cycles,instructions`:
+```
+ Performance counter stats for './HW2_linked_list_cache':
+
+           120,644      cache-references                                                      
+            25,463      cache-misses                     #   21.11% of all cache refs         
+         3,204,913      cycles                                                                
+         2,015,376      instructions                     #    0.63  insn per cycle            
+```
+`perf record -e L1-dcache-load-misses`:
 ```
 Samples: 15  of event 'L1-dcache-load-misses', Event count (approx.): 29714
 Overhead  Command          Shared Object          Symbol
@@ -104,6 +124,19 @@ Overhead  Command          Shared Object          Symbol
 ### $10^6$ Nodes
 ___
 two-scan
+`perf stat -e cache-references,cache-misses,cycles,instructions`:
+```
+Performance counter stats for './HW2_linked_list_cache':
+
+         3,183,326      cache-references                                                      
+           184,153      cache-misses                     #    5.78% of all cache refs         
+       124,708,610      cycles                                                                
+       122,521,646      instructions                     #    0.98  insn per cycle            
+
+       0.051247888 seconds time elapsed
+
+```
+`perf record -e L1-dcache-load-misses`:
 ```
 Samples: 250  of event 'L1-dcache-load-misses', Event count (approx.): 1484982
 Overhead  Command          Shared Object          Symbol
@@ -118,6 +151,18 @@ Overhead  Command          Shared Object          Symbol
 ```
 ___
 fast-and-slow-pointers
+`perf stat -e cache-references,cache-misses,cycles,instructions`:
+```
+Performance counter stats for './HW2_linked_list_cache':
+
+         3,195,187      cache-references                                                      
+           171,706      cache-misses                     #    5.37% of all cache refs         
+       116,384,663      cycles                                                                
+       118,272,511      instructions                     #    1.02  insn per cycle            
+
+       0.046525541 seconds time elapsed
+```
+`perf record -e L1-dcache-load-misses`:
 ```
 Samples: 261  of event 'L1-dcache-load-misses', Event count (approx.): 1565026
 Overhead  Command          Shared Object          Symbol
@@ -130,10 +175,20 @@ Overhead  Command          Shared Object          Symbol
    4.34%  HW2_linked_list  HW2_linked_list_cache  [.] list_free
 ```
 
-
 ### $10^8$ Nodes
 ___
 two-scan
+`perf stat -e cache-references,cache-misses,cycles,instructions`:
+```
+Performance counter stats for './HW2_linked_list_cache':
+
+       464,261,405      cache-references                                                      
+        38,872,520      cache-misses                     #    8.37% of all cache refs         
+    18,665,847,951      cycles                                                                
+    15,737,856,682      instructions                     #    0.84  insn per cycle 
+    8.309130776 seconds time elapsed
+```
+`perf record -e L1-dcache-load-misses`:
 ```
 Samples: 15K of event 'L1-dcache-load-misses', Event count (approx.): 135589989
 Overhead  Command          Shared Object          Symbol
@@ -147,6 +202,18 @@ Overhead  Command          Shared Object          Symbol
 ```
 ___
 fast-and-slow-pointers
+`perf stat -e cache-references,cache-misses,cycles,instructions`:
+```
+ Performance counter stats for './HW2_linked_list_cache':
+
+       282,561,652      cache-references                                                      
+         9,319,542      cache-misses                     #    3.30% of all cache refs         
+    13,076,105,358      cycles                                                                
+    12,269,985,739      instructions                     #    0.94  insn per cycle            
+
+       3.576660428 seconds time elapsed
+```
+`perf record -e L1-dcache-load-misses`:
 ```
 Samples: 13K of event 'L1-dcache-load-misses', Event count (approx.): 125733267
 Overhead  Command          Shared Object          Symbol
@@ -168,4 +235,6 @@ Our benchmarks focused on cache-miss counts, which means the instances when the 
 |$10^4$|2333|
 |$10^6$|-80044|
 |$10^8$|9856722|
+
+In addition, by comparing the elapsed time of the 2 algorithms in each trial, one could see ***fast-and-slow-pointers*** is faster than ***two-scan*** in every trial. Moreover, in each trial, for all cache references, ***fast-and-slow-pointers*** has a lower percentage of cache-misses. These results back up the conclusion in [〈分析快慢指標〉](https://hackmd.io/@sysprog/ry8NwAMvT), showing ***fast-and-slow-pointers*** have better temporal locality.
 

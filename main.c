@@ -5,10 +5,10 @@
 #include "allocator.h"
 #include "list.h"
 
-// #define TWO_SCAN /* uncomment this for 2 scan benchmarks */
+#define TWO_SCAN /* uncomment this for 2 scan benchmarks */
 
 const char *prog_name = "list_creation";
-#define LIST_SIZE 100000000
+#define LIST_SIZE 1000000
 
 /* static helper for shuffle */
 // static inline void _fisher_yates_shuffle(struct list_node **a_head);
