@@ -63,8 +63,17 @@ Linux IdeaPad-3-15ADA05 6.17.0-19-generic #19~24.04.2-Ubuntu SMP PREEMPT_DYNAMIC
 ## Results
 ### $10^4$ Nodes
 ___
-2-scan
-`perf record -e L1-dcache-load-misses`:
+2-scan  
+`perf stat -e cache-references,cache-misses,cycles,instructions`:  
+```
+Performance counter stats for './HW2_linked_list_cache':
+
+           134,249      cache-references                                                      
+            33,338      cache-misses                     #   24.83% of all cache refs         
+         2,421,890      cycles                                                                
+         2,107,601      instructions                     #    0.87  insn per cycle            
+```  
+`perf record -e L1-dcache-load-misses`:  
 ```
 Samples: 16  of event 'L1-dcache-load-misses', Event count (approx.): 32047
 Overhead  Command          Shared Object          Symbol
@@ -82,18 +91,9 @@ Overhead  Command          Shared Object          Symbol
    0.12%  HW2_linked_list  [unknown]              [k] 0xffffffff81d99b04
    0.02%  perf-exec        [unknown]              [k] 0xffffffff82fab391
 ```
-`perf stat -e cache-references,cache-misses,cycles,instructions`:
-```
-Performance counter stats for './HW2_linked_list_cache':
-
-           134,249      cache-references                                                      
-            33,338      cache-misses                     #   24.83% of all cache refs         
-         2,421,890      cycles                                                                
-         2,107,601      instructions                     #    0.87  insn per cycle            
-```
 ___
-fast-and-slow-pointers
-`perf stat -e cache-references,cache-misses,cycles,instructions`:
+fast-and-slow-pointers  
+`perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
  Performance counter stats for './HW2_linked_list_cache':
 
@@ -102,7 +102,7 @@ fast-and-slow-pointers
          3,204,913      cycles                                                                
          2,015,376      instructions                     #    0.63  insn per cycle            
 ```
-`perf record -e L1-dcache-load-misses`:
+`perf record -e L1-dcache-load-misses`:  
 ```
 Samples: 15  of event 'L1-dcache-load-misses', Event count (approx.): 29714
 Overhead  Command          Shared Object          Symbol
@@ -123,8 +123,8 @@ Overhead  Command          Shared Object          Symbol
 
 ### $10^6$ Nodes
 ___
-two-scan
-`perf stat -e cache-references,cache-misses,cycles,instructions`:
+two-scan  
+`perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
 Performance counter stats for './HW2_linked_list_cache':
 
@@ -136,7 +136,7 @@ Performance counter stats for './HW2_linked_list_cache':
        0.051247888 seconds time elapsed
 
 ```
-`perf record -e L1-dcache-load-misses`:
+`perf record -e L1-dcache-load-misses`:  
 ```
 Samples: 250  of event 'L1-dcache-load-misses', Event count (approx.): 1484982
 Overhead  Command          Shared Object          Symbol
@@ -151,7 +151,7 @@ Overhead  Command          Shared Object          Symbol
 ```
 ___
 fast-and-slow-pointers
-`perf stat -e cache-references,cache-misses,cycles,instructions`:
+`perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
 Performance counter stats for './HW2_linked_list_cache':
 
@@ -161,8 +161,8 @@ Performance counter stats for './HW2_linked_list_cache':
        118,272,511      instructions                     #    1.02  insn per cycle            
 
        0.046525541 seconds time elapsed
-```
-`perf record -e L1-dcache-load-misses`:
+```  
+`perf record -e L1-dcache-load-misses`:   
 ```
 Samples: 261  of event 'L1-dcache-load-misses', Event count (approx.): 1565026
 Overhead  Command          Shared Object          Symbol
@@ -175,10 +175,10 @@ Overhead  Command          Shared Object          Symbol
    4.34%  HW2_linked_list  HW2_linked_list_cache  [.] list_free
 ```
 
-### $10^8$ Nodes
+### $10^8$ Nodes  
 ___
-two-scan
-`perf stat -e cache-references,cache-misses,cycles,instructions`:
+two-scan  
+`perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
 Performance counter stats for './HW2_linked_list_cache':
 
@@ -188,7 +188,7 @@ Performance counter stats for './HW2_linked_list_cache':
     15,737,856,682      instructions                     #    0.84  insn per cycle 
     8.309130776 seconds time elapsed
 ```
-`perf record -e L1-dcache-load-misses`:
+`perf record -e L1-dcache-load-misses`:  
 ```
 Samples: 15K of event 'L1-dcache-load-misses', Event count (approx.): 135589989
 Overhead  Command          Shared Object          Symbol
@@ -201,8 +201,8 @@ Overhead  Command          Shared Object          Symbol
    2.69%  HW2_linked_list  HW2_linked_list_cache  [.] mem_alloc
 ```
 ___
-fast-and-slow-pointers
-`perf stat -e cache-references,cache-misses,cycles,instructions`:
+fast-and-slow-pointers  
+`perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
  Performance counter stats for './HW2_linked_list_cache':
 
@@ -213,7 +213,7 @@ fast-and-slow-pointers
 
        3.576660428 seconds time elapsed
 ```
-`perf record -e L1-dcache-load-misses`:
+`perf record -e L1-dcache-load-misses`:  
 ```
 Samples: 13K of event 'L1-dcache-load-misses', Event count (approx.): 125733267
 Overhead  Command          Shared Object          Symbol
