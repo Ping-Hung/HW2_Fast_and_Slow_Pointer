@@ -7,11 +7,12 @@
 Referring back to [HackMD's Experiment Design](https://hackmd.io/@d1MVB-tCQ92KCHBsW4mrJg/linux2026-hw2?stext=509%3A148%3A0%3A1774135145%3AiSSbet), the experiment will try to mimic real-world memory allocation patterns, which leads to the following program outline.
 
 ### Program Outline
-1. Allocate memory (from OS) using a self implemented *slab allocator*.
-2. Build a linked-list via a *slab allocator*.
-3. Randomize the list nodes using [*Fiser-Yates shuffle*](https://hackmd.io/@sysprog/c-linked-list#%E5%AF%A6%E4%BD%9C).
-4. Run the middle-finding algorithm of choice (*two-scan* or *fast-and-slow-pointers*).
-5. Free all allocated memory.
+1. Allocate a continuous, aligned memory chunck (from the OS) to a self implemented *slab allocator*.
+2. Cut the allocated memory into equally sized slabs.
+3. Build a linked-list by distributing the slabs.
+4. ~~Randomize the list nodes using [*Fiser-Yates shuffle*](https://hackmd.io/@sysprog/c-linked-list#%E5%AF%A6%E4%BD%9C).~~
+5. Run the middle-finding algorithm of choice (*two-scan* or *fast-and-slow-pointers*).
+6. Free all allocated memory.
 
 ### Experiment Procedure:
 * 3 trials will be run, each time with different number of `list_node`s.
@@ -123,7 +124,8 @@ Overhead  Command          Shared Object          Symbol
 
 ### $10^6$ Nodes
 ___
-two-scan  
+two-scan
+
 `perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
 Performance counter stats for './HW2_linked_list_cache':
@@ -151,6 +153,8 @@ Overhead  Command          Shared Object          Symbol
 ```
 ___
 fast-and-slow-pointers
+
+
 `perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
 Performance counter stats for './HW2_linked_list_cache':
@@ -177,7 +181,8 @@ Overhead  Command          Shared Object          Symbol
 
 ### $10^8$ Nodes  
 ___
-two-scan  
+two-scan
+
 `perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
 Performance counter stats for './HW2_linked_list_cache':
@@ -201,7 +206,9 @@ Overhead  Command          Shared Object          Symbol
    2.69%  HW2_linked_list  HW2_linked_list_cache  [.] mem_alloc
 ```
 ___
-fast-and-slow-pointers  
+fast-and-slow-pointers
+
+
 `perf stat -e cache-references,cache-misses,cycles,instructions`:  
 ```
  Performance counter stats for './HW2_linked_list_cache':
@@ -227,8 +234,7 @@ Overhead  Command          Shared Object          Symbol
 
 ```
 ## Summary
-
-Our benchmarks focused on cache-miss counts, which means the instances when the CPU is forced to fetch data from RAM. Through subracting the Event count of ***fast-and-slow-pointers*** from ***two-scan***, we could see that ***fast-and-slow-pointers*** have less cache misses, hence a better locality.
+Our benchmarks focused on cache-miss counts of the 2 algorithms, which measures the instances when the CPU is forced to fetch data from RAM. Through subracting the Event count of ***fast-and-slow-pointers*** from ***two-scan***, we could see that ***fast-and-slow-pointers*** have less cache misses, hence a better locality.
 
 |run|Event count(approx.) difference of the 2 algorithms|
 |:---:|:---:|
@@ -236,5 +242,7 @@ Our benchmarks focused on cache-miss counts, which means the instances when the 
 |$10^6$|-80044|
 |$10^8$|9856722|
 
-In addition, by comparing the elapsed time of the 2 algorithms in each trial, one could see ***fast-and-slow-pointers*** is faster than ***two-scan*** in every trial. Moreover, in each trial, for all cache references, ***fast-and-slow-pointers*** has a lower percentage of cache-misses. These results back up the conclusion in [〈分析快慢指標〉](https://hackmd.io/@sysprog/ry8NwAMvT), showing ***fast-and-slow-pointers*** have better temporal locality.
+In addition, by comparing the elapsed time of the 2 algorithms in each trial, one could see ***fast-and-slow-pointers*** is faster than ***two-scan*** in every trial. Moreover, in each trial, for all cache references, ***fast-and-slow-pointers*** has a lower cache-miss rate. These results back up the conclusion in [〈分析快慢指標〉](https://hackmd.io/@sysprog/ry8NwAMvT), showing ***fast-and-slow-pointers*** have better temporal locality.
+
+It should be noted that all the experiment conducted above makes use of the ***slab allocator*** for list construction. Also, Fisher-Yates randomization is eliminated since it creates a lot of cache misses, blurring the focus of analyzing the cache performance of the two algorithms.
 
