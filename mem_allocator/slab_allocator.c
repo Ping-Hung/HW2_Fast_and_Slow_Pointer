@@ -17,13 +17,12 @@ void allocator_init(struct slab_allocator* allocator, size_t obj_size, size_t ob
     }
     allocator->head = (void**)aligned_alloc(obj_size, obj_size * obj_count);
     allocator->base = (void*)allocator->head;
-    char *node = (char*)allocator->head;
-    for (size_t i = 1; i < obj_count; i++)
-    {
+    void *node = (void *)allocator->head;
+    for (size_t i = 1; i < obj_count; i++) {    /* want to cut slab into *obj_count* chuncks, so cut obj_count - 1 times */
         *((void**)node) = node + obj_size;
         node += obj_size;
     }
-    *((void**)node) = NULL;
+    *(void **)node = NULL;
 }
 
 void *mem_alloc(struct slab_allocator* allocator)
